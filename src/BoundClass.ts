@@ -4,7 +4,7 @@ function getPerformed(instance: any, method: PropertyKey): boolean {
   return (instance[bindingPerformed] || (instance[bindingPerformed] = {}))[method];
 }
 
-export function performBinding(instance: any) {
+function performBinding(instance: any) {
   if (instance[boundMethods]) {
     let methodName: PropertyKey;
     for (let i = 0; i < instance[boundMethods].length; i++) {
@@ -16,3 +16,22 @@ export function performBinding(instance: any) {
     }
   }
 }
+
+export function BoundClass(): ClassDecorator {
+  return (construct: any): any => {
+    return class ClassWithBindings extends construct {
+      public constructor(...args: any[]) {
+        super(...args);
+        performBinding(this);
+      }
+    };
+  };
+}
+
+BoundClass.perform = performBinding; //for typings
+Object.defineProperty(BoundClass, 'perform', { //for immutability
+  configurable: false,
+  enumerable: true,
+  value: performBinding,
+  writable: false
+});

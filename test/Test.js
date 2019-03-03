@@ -1,12 +1,9 @@
 const {expect} = require('chai');
-const {TSBoundClass, JSBoundClass, BoundMethod} = require('../dist');
+const {BoundClass, BoundMethod} = require('../dist');
 const {boundMethods, bindingPerformed, boundMethodArgs} = require('../dist/symbols');
 const _ = require('lodash');
 
 const isNew = TEST_TYPE === 'new';
-
-// const BoundClass = TEST_TYPE === 'typescript' ? TSBoundClass : JSBoundClass;
-const BoundClass = TSBoundClass;
 
 describe(_.startCase(TEST_TYPE), function () {
   describe('.perform() descriptor', () => {
@@ -87,21 +84,8 @@ describe(_.startCase(TEST_TYPE), function () {
     }
   });
 
-  describe.only('Bound class (internal)', () => {
-    if (isNew) {
-      it.skip('Should throw if the class is decorated', () => {
-        expect(() => {
-          @BoundClass()
-          class Class {
-            @BoundMethod()
-            boundMethod() {
-            }
-          }
-
-          new Class();
-        }).to.throw();
-      })
-    } else {
+  if (!isNew) {
+    describe('Bound class (internal)', () => {
       let Clazz, inst;
 
       before('Init class', () => {
@@ -123,6 +107,6 @@ describe(_.startCase(TEST_TYPE), function () {
       it('bindingPerformed should exist on instance', () => {
         expect(inst[bindingPerformed]).to.deep.eq({boundMethod: true});
       });
-    }
-  })
+    });
+  }
 });

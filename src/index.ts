@@ -1,4 +1,2 @@
-export {TSBoundClass} from './TSBoundClass';
+export {BoundClass} from './BoundClass';
 export {BoundMethod} from './BoundMethod';
-/** @internal */
-export {JSBoundClass} from './JSBoundClass';
