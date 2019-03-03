@@ -16,6 +16,7 @@ copy-files:
 build:
   entry: src/index.ts
   targets:
+    - cjs
     - declaration
     - fesm5
     - fesm2015

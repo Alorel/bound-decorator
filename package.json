@@ -26,7 +26,7 @@
     "tslint:fix": "npm --scripts-prepend-node-path=auto run tslint -- --fix",
     "typecheck": "tsc --noEmit",
     "typecheck:watch": "npm --scripts-prepend-node-path=auto run typecheck -- --watch",
-    "build": "concurrently -n Core,CommonJS \"alo build\" \"tsc --target esnext\""
+    "build": "alo build && tsc --target esnext"
   },
   "repository": "git@github.com:Alorel/bound-decorator.git",
   "dependencies": {
@@ -61,5 +61,14 @@
     "typescript": "^3.3.3"
   },
   "license": "MIT",
-  "main": "index.js"
+  "main": "index.js",
+  "browser": "_bundle/umd.js",
+  "jsdelivr": "_bundle/umd.min.js",
+  "fesm5": "_bundle/fesm5.js",
+  "esm5": "_bundle/fesm5.js",
+  "fesm2015": "_bundle/fesm2015.js",
+  "esm2015": "_bundle/fesm5.js",
+  "types": "index.d.ts",
+  "module": "_bundle/fesm5.js",
+  "typings": "index.d.ts"
 }
