@@ -1,4 +1,3 @@
-/.idea/
 .idea/
 node_modules/
 dist/
@@ -8,3 +7,4 @@ yarn-error.log
 *.tgz
 /.alobuild-tsconfig-*.json
 package-lock.json
+/test/Test.*.js

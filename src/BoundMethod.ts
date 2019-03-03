@@ -1,18 +1,10 @@
 import {ProposalDescriptor} from './ProposalDescriptor';
-import {bindingPerformed, boundMethodArgs, boundMethods} from './symbols';
+import {boundMethodArgs, boundMethods} from './symbols';
 
 const ERR_NOT_A_METHOD = '@BoundMethod can only decorate methods';
-
-function ensureProperties(target: any): void {
-  if (!target[boundMethods]) {
-    Object.defineProperty(target, boundMethods, {value: []});
-    Object.defineProperty(target, boundMethodArgs, {value: []});
-    Object.defineProperty(target, bindingPerformed, {value: {}});
-  }
-}
+const ERR_STATIC = '@BoundMethod can only decorate instance methods';
 
 function decorateLegacy(args: any[], target: any, method: PropertyKey, desc: PropertyDescriptor): void {
-  /* istanbul ignore if */
   if (!desc) {
     desc = <any>Object.getOwnPropertyDescriptor(target, method);
     if (!desc) {
@@ -22,16 +14,23 @@ function decorateLegacy(args: any[], target: any, method: PropertyKey, desc: Pro
 
   if (typeof desc.value !== 'function') {
     throw new Error(ERR_NOT_A_METHOD);
+  } else if (Object.getPrototypeOf(target) === Function.prototype) {
+    throw new Error(ERR_STATIC);
   }
 
-  ensureProperties(target);
+  if (!target[boundMethods]) {
+    Object.defineProperties(target, {
+      [boundMethods]: {value: []},
+      [boundMethodArgs]: {value: []}
+    });
+  }
   target[boundMethods].push(method);
   target[boundMethodArgs].push(args);
 }
 
 function decorateNew(args: any[], desc: ProposalDescriptor): ProposalDescriptor {
   if (desc.placement !== 'prototype') {
-    throw new Error('Only instance methods may be decorated.');
+    throw new Error(ERR_STATIC);
   } else if (desc.kind !== 'method') {
     throw new Error(ERR_NOT_A_METHOD);
   }
