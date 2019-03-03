@@ -1,0 +1,51 @@
+{
+  "name": "bound-decorator",
+  "version": "0.0.1",
+  "description": "A TypeScript/ES7 decorator for automatically binding methods to the class instance",
+  "keywords": [
+    "bound",
+    "decorator",
+    "typescript",
+    "babel",
+    "es7",
+    "bind",
+    "method",
+    "auto"
+  ],
+  "scripts": {
+    "pretest": "rimraf coverage",
+    "test": "nyc mocha --opts ./mocha.opts",
+    "test:watch": "npm --scripts-prepend-node-path=auto run test -- --watch",
+    "tslint": "alo tslint -p tsconfig.test.json",
+    "tslint:fix": "npm --scripts-prepend-node-path=auto run tslint -- --fix",
+    "typecheck": "tsc --noEmit",
+    "typecheck:watch": "npm --scripts-prepend-node-path=auto run typecheck -- --watch",
+    "build": "alo build"
+  },
+  "repository": "git@github.com:Alorel/bound-decorator.git",
+  "devDependencies": {
+    "@alorel-personal/build-tools": "4.4.9",
+    "@alorel-personal/conventional-changelog-alorel": "2.0.4",
+    "@alorel-personal/semantic-release": "1.4.0",
+    "@alorel-personal/tslint-rules": "4.1.1",
+    "@semantic-release/changelog": "~3.0.2",
+    "@semantic-release/exec": "~3.3.2",
+    "@semantic-release/git": "~7.0.8",
+    "@types/chai": "~4.1.7",
+    "@types/mocha": "~5.2.6",
+    "@types/node": "~11.10.4",
+    "chai": "~4.2.0",
+    "coveralls": "~3.0.3",
+    "mocha": "~6.0.2",
+    "nyc": "~13.3.0",
+    "rimraf": "~2.6.3",
+    "semantic-release": "~15.13.3",
+    "source-map-support": "~0.5.10",
+    "ts-node": "~8.0.2",
+    "tslib": "~1.9.3"
+  },
+  "peerDependencies": {
+    "tslib": "^1.6.0"
+  },
+  "license": "MIT"
+}

@@ -1,1 +1,10 @@
 /.idea/
+.idea/
+node_modules/
+dist/
+coverage/
+.nyc_output/
+yarn-error.log
+*.tgz
+/.alobuild-tsconfig-*.json
+package-lock.json
