@@ -147,6 +147,30 @@ describe(_.startCase(TEST_TYPE), function () {
         it('mapper2 should return [10, 10]', () => {
           expect([1, 2].map(inst.mapper2)).to.deep.eq([10, 10]);
         });
+
+        describe('Should be able to map from inside constructor', () => {
+          let res;
+
+          before('Run', () => {
+            class C2 extends BaseClass {
+              constructor() {
+                super();
+                this.r1 = [1, 2].map(this.mapper1);
+                this.r2 = [1, 2].map(this.mapper2);
+              }
+            }
+
+            res = new C2();
+          });
+
+          it('mapper1 should return [2, 4]', () => {
+            expect(res.r1).to.deep.eq([2, 4]);
+          });
+
+          it('mapper2 should return [10, 10]', () => {
+            expect(res.r2).to.deep.eq([10, 10]);
+          });
+        });
       });
     }
 
