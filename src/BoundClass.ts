@@ -4,7 +4,11 @@ function getPerformed(instance: any, method: PropertyKey): boolean {
   return (instance[bindingPerformed] || (instance[bindingPerformed] = {}))[method];
 }
 
-function performBinding(instance: any) {
+/**
+ * Manually bind methods decorated with @BoundMethod.
+ * @param instance The class instance
+ */
+function performBinding(instance: any): void {
   if (instance[boundMethods]) {
     let methodName: PropertyKey;
     for (let i = 0; i < instance[boundMethods].length; i++) {
@@ -17,6 +21,10 @@ function performBinding(instance: any) {
   }
 }
 
+/**
+ * Decorate the class, making all methods decorated with @BoundMethod bound to
+ * class instances.
+ */
 export function BoundClass(): ClassDecorator {
   return (construct: any): any => {
     return class ClassWithBindings extends construct {

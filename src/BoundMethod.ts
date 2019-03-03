@@ -66,6 +66,11 @@ function decorateNew(args: any[], desc: ProposalDescriptor): ProposalDescriptor 
   return desc;
 }
 
+/**
+ * Mark the method to be automatically bound to the class instance
+ * @param args Optional arguments to pass to Function.prototype.bind
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
+ */
 export function BoundMethod(...args: any[]): MethodDecorator {
   return (targetOrDescriptor: any, method: PropertyKey, desc: PropertyDescriptor): ProposalDescriptor | void => {
     if (method) {
