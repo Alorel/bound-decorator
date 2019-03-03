@@ -20,7 +20,8 @@
     "test:babel:new": "babel --config-file ./.babelrc.new -o test/Test.new.js test/Test.js",
     "test:compile": "concurrently -n tsc:test \"tsc -p ./tsconfig.test.json\" \"npm:test:babel:*\"",
     "pretest": "concurrently -n build:src,build:test,clean \"alo build --targets cjs\" \"npm run test:compile && node pretest-postprocess.js\" \"rimraf coverage\"",
-    "test": "nyc mocha --check-leaks --exit --full-trace test/Test.legacy.js test/Test.new.js test/Test.typescript.js",
+    "doctoc": "echo 0",
+    "test": "nyc mocha -r source-map-support/register --check-leaks --exit --full-trace test/Test.legacy.js test/Test.new.js test/Test.typescript.js",
     "test:watch": "npm --scripts-prepend-node-path=auto run test -- --watch",
     "tslint": "alo tslint -p ./tsconfig.lint.json",
     "tslint:fix": "npm --scripts-prepend-node-path=auto run tslint -- --fix",
@@ -58,6 +59,7 @@
     "rimraf": "~2.6.3",
     "semantic-release": "~15.13.3",
     "source-map-support": "~0.5.10",
+    "ts-node": "^8.0.2",
     "typescript": "^3.3.3"
   },
   "license": "MIT",

@@ -9,7 +9,7 @@ function performBinding(instance: any) {
     let methodName: PropertyKey;
     for (let i = 0; i < instance[boundMethods].length; i++) {
       methodName = instance[boundMethods][i];
-      if (!getPerformed(instance, methodName)) {
+      if (instance[methodName] && !getPerformed(instance, methodName)) {
         instance[methodName] = (<Function>instance[methodName]).bind(instance, ...instance[boundMethodArgs][i]);
         instance[bindingPerformed][methodName] = true;
       }

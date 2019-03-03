@@ -109,4 +109,128 @@ describe(_.startCase(TEST_TYPE), function () {
       });
     });
   }
+
+  describe('Runtime test', () => {
+    class BaseClass {
+      constructor(num = 2) {
+        this.INSTANCE_NUM = num;
+      }
+
+      @BoundMethod()
+      mapper1(num) {
+        return num * this.INSTANCE_NUM;
+      }
+
+      @BoundMethod(5)
+      mapper2(num) {
+        return num * this.INSTANCE_NUM;
+      }
+
+      @BoundMethod()
+      mapper3(num) {
+        return num * this.INSTANCE_NUM;
+      }
+    }
+
+    if (isNew) {
+      describe('Undecorated class', () => {
+        let inst;
+
+        before('Instantiate', () => {
+          inst = new BaseClass();
+        });
+
+        it('mapper1 should return [2, 4]', () => {
+          expect([1, 2].map(inst.mapper1)).to.deep.eq([2, 4]);
+        });
+
+        it('mapper2 should return [10, 10]', () => {
+          expect([1, 2].map(inst.mapper2)).to.deep.eq([10, 10]);
+        });
+      });
+    }
+
+    describe('Base instance', () => {
+      let inst;
+
+      before('Instantiate', () => {
+        @BoundClass()
+        class BoundBaseClass extends BaseClass {
+        }
+
+        inst = new BoundBaseClass();
+      });
+
+      it('mapper1 should return [2, 4]', () => {
+        expect([1, 2].map(inst.mapper1)).to.deep.eq([2, 4]);
+      });
+
+      it('mapper2 should return [10, 10]', () => {
+        expect([1, 2].map(inst.mapper2)).to.deep.eq([10, 10]);
+      });
+    });
+
+    describe('Inherited instance', () => {
+      let inst;
+
+      before('Instantiate', () => {
+        @BoundClass()
+        class BoundInheritedClass extends BaseClass {
+          constructor() {
+            super(5);
+          }
+
+          @BoundMethod(10)
+          mapper1(num) {
+            return num * this.INSTANCE_NUM;
+          }
+
+          @BoundMethod()
+          mapper2(num) {
+            return num * this.INSTANCE_NUM;
+          }
+
+          @BoundMethod()
+          mapper3(num) {
+            return (num * this.INSTANCE_NUM) + 1000;
+          }
+
+          @BoundMethod()
+          mapper4() {
+            return this.INSTANCE_NUM;
+          }
+        }
+
+        inst = new BoundInheritedClass();
+      });
+
+      it('mapper1 should return [50, 50]', () => {
+        expect([1, 2].map(inst.mapper1)).to.deep.eq([50, 50]);
+      });
+
+      it('mapper2 should return [5, 10]', () => {
+        expect([1, 2].map(inst.mapper2)).to.deep.eq([5, 10]);
+      });
+
+      it('mapper3 should return [1005, 1010]', () => {
+        expect([1, 2].map(inst.mapper3)).to.deep.eq([1005, 1010]);
+      });
+
+      it('base mapper3 should return [4, 8]', () => {
+        @BoundClass()
+        class NewBase extends BaseClass {
+          constructor() {
+            super(4);
+          }
+        }
+
+        const nb = new NewBase();
+        expect([1, 2].map(nb.mapper3)).to.deep.eq([4, 8]);
+      });
+
+      it('mapper4 should return [5, 5]', () => {
+        expect([1, 2].map(inst.mapper4)).to.deep.eq([5, 5]);
+      });
+    })
+  })
 });

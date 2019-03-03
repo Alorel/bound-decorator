@@ -24,8 +24,14 @@ function decorateLegacy(args: any[], target: any, method: PropertyKey, desc: Pro
       [boundMethodArgs]: {value: []}
     });
   }
-  target[boundMethods].push(method);
-  target[boundMethodArgs].push(args);
+  // Override args in extending class
+  const idx = target[boundMethods].indexOf(method);
+  if (idx === -1) {
+    target[boundMethods].push(method);
+    target[boundMethodArgs].push(args);
+  } else {
+    target[boundMethodArgs][idx] = args;
+  }
 }
 
 function decorateNew(args: any[], desc: ProposalDescriptor): ProposalDescriptor {
