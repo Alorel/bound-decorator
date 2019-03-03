@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 
 describe('Stub test suite', function () {
-  it('Stub test', () => {
-    console.log('I pass!');
+  it('I pass', () => {
+    expect(true).to.eq(true);
   });
 });

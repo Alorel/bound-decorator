@@ -1,5 +1,5 @@
 {
-  "name": "bound-decorator",
+  "name": "@aloreljs/bound-decorator",
   "version": "0.0.1",
   "description": "A TypeScript/ES7 decorator for automatically binding methods to the class instance",
   "keywords": [
@@ -12,6 +12,9 @@
     "method",
     "auto"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "pretest": "rimraf coverage",
     "test": "nyc mocha --opts ./mocha.opts",
@@ -47,5 +50,15 @@
   "peerDependencies": {
     "tslib": "^1.6.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "main": "index.js",
+  "browser": "_bundle/umd.js",
+  "jsdelivr": "_bundle/umd.min.js",
+  "fesm5": "_bundle/fesm5.js",
+  "esm5": "_bundle/fesm5.js",
+  "fesm2015": "_bundle/fesm2015.js",
+  "esm2015": "_bundle/fesm5.js",
+  "types": "index.d.ts",
+  "module": "_bundle/fesm5.js",
+  "typings": "index.d.ts"
 }
