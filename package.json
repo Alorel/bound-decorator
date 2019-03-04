@@ -1,6 +1,6 @@
 {
   "name": "@aloreljs/bound-decorator",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "A TypeScript/ES7 decorator for automatically binding methods to the class instance",
   "keywords": [
     "bound",
