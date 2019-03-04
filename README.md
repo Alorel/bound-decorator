@@ -57,7 +57,6 @@ While no polyfills should be required for Node, you should ensure that the follo
 are available in the browser:
 
 - Symbol constructor
-- Object.defineProperties
 - Object.defineProperty
 
 # Usage

@@ -19,10 +19,8 @@ function decorateLegacy(args: any[], target: any, method: PropertyKey, desc: Pro
   }
 
   if (!target[boundMethods]) {
-    Object.defineProperties(target, {
-      [boundMethods]: {value: []},
-      [boundMethodArgs]: {value: []}
-    });
+    Object.defineProperty(target, boundMethods, {value: []});
+    Object.defineProperty(target, boundMethodArgs, {value: []});
   }
   // Override args in extending class
   const idx = target[boundMethods].indexOf(method);
