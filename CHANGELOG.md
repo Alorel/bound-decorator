@@ -1,3 +1,15 @@
+## [1.0.1](https://github.com/Alorel/bound-decorator/compare/1.0.0...1.0.1) (2019-03-04)
+
+
+### Bug Fixes
+
+* Drop Object.defineProperties in BoundMethod ([d6d27b8](https://github.com/Alorel/bound-decorator/commit/d6d27b8))
+
+
+### Refactoring
+
+* Chande symbol descriptions. ([864a0df](https://github.com/Alorel/bound-decorator/commit/864a0df))
+
 # 1.0.0 (2019-03-03)
 
 
