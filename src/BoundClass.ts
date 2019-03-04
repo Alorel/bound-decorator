@@ -37,7 +37,8 @@ export function BoundClass(): ClassDecorator {
 }
 
 BoundClass.perform = performBinding; //for typings
-Object.defineProperty(BoundClass, 'perform', { //for immutability
+//for immutability
+Object.defineProperty(BoundClass, 'perform', {
   configurable: false,
   enumerable: true,
   value: performBinding,

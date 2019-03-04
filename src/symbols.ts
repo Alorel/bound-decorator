@@ -1,6 +1,6 @@
 /** @internal */
-export const boundMethods: unique symbol = Symbol('Bound methods');
+export const boundMethods: unique symbol = Symbol('@aloreljs/bound-decorator: Bound methods');
 /** @internal */
-export const bindingPerformed: unique symbol = Symbol('Binding performed');
+export const bindingPerformed: unique symbol = Symbol('@aloreljs/bound-decorator: Binding performed');
 /** @internal */
-export const boundMethodArgs: unique symbol = Symbol('Bound method args');
+export const boundMethodArgs: unique symbol = Symbol('@aloreljs/bound-decorator: Bound method args');
