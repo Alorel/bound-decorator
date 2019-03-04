@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/Alorel/bound-decorator/compare/1.0.1...1.0.2) (2019-03-04)
+
+
+### Documentation
+
+* Add Angular note ([50c2f4d](https://github.com/Alorel/bound-decorator/commit/50c2f4d))
+
 ## [1.0.1](https://github.com/Alorel/bound-decorator/compare/1.0.0...1.0.1) (2019-03-04)
 
 
