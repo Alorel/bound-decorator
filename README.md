@@ -18,7 +18,8 @@
 - [Usage](#usage)
   - [TypeScript and Legacy Babel Decorators](#typescript-and-legacy-babel-decorators)
   - [Babel Decorators - Current Proposal](#babel-decorators---current-proposal)
-  - [Usage note (Typescript and Babel Legacy only)](#usage-note-typescript-and-babel-legacy-only)
+  - [General usage note (Typescript and Babel Legacy only)](#general-usage-note-typescript-and-babel-legacy-only)
+  - [Note for Angular developers (Typescript and Babel Legacy-only)](#note-for-angular-developers-typescript-and-babel-legacy-only)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -98,7 +99,7 @@ class MyClass {
 }
 ```
 
-## Usage note (Typescript and Babel Legacy only)
+## General usage note (Typescript and Babel Legacy only)
 
 Note that the methods get bound **after** the constructor is executed, therefore
 they will not be bound yet if called from inside the constructor.
@@ -158,4 +159,6 @@ class MyClass {
 }
 ```
 
+## Note for Angular developers (Typescript and Babel Legacy-only)
 
+`@BoundClass()` will break injected properties. You need to use the `BoundClass.perform(this);` syntax.
