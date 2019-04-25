@@ -1,13 +1,5 @@
 import {bindingPerformed, boundMethodArgs, boundMethods} from './symbols';
 
-function getPerformed(instance: any, method: PropertyKey): boolean {
-  if (!instance[bindingPerformed]) {
-    Object.defineProperty(instance, bindingPerformed, {value: {}});
-  }
-
-  return instance[bindingPerformed][method];
-}
-
 /**
  * Manually bind methods decorated with @BoundMethod.
  * @param instance The class instance
@@ -15,9 +7,13 @@ function getPerformed(instance: any, method: PropertyKey): boolean {
 function performBinding(instance: any): void {
   if (instance[boundMethods]) {
     let methodName: PropertyKey;
+    if (!instance[bindingPerformed]) {
+      Object.defineProperty(instance, bindingPerformed, {value: {}});
+    }
+
     for (let i = 0; i < instance[boundMethods].length; i++) {
       methodName = instance[boundMethods][i];
-      if (instance[methodName] && !getPerformed(instance, methodName)) {
+      if (instance[methodName] && !instance[bindingPerformed][methodName]) {
         instance[methodName] = (<Function>instance[methodName]).bind(instance, ...instance[boundMethodArgs][i]);
         instance[bindingPerformed][methodName] = true;
       }
