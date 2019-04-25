@@ -1,7 +1,11 @@
 import {bindingPerformed, boundMethodArgs, boundMethods} from './symbols';
 
 function getPerformed(instance: any, method: PropertyKey): boolean {
-  return (instance[bindingPerformed] || (instance[bindingPerformed] = {}))[method];
+  if (!instance[bindingPerformed]) {
+    Object.defineProperty(instance, bindingPerformed, {value: {}});
+  }
+
+  return instance[bindingPerformed][method];
 }
 
 /**
