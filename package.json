@@ -55,7 +55,7 @@
     "coveralls": "~3.0.3",
     "doctoc": "~1.4.0",
     "lodash": "^4.17.14",
-    "mocha": "~6.1.1",
+    "mocha": "~6.2.0",
     "nyc": "~14.1.0",
     "rimraf": "~2.6.3",
     "semantic-release": "~15.13.3",
