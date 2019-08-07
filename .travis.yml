@@ -4,7 +4,6 @@ node_js:
   - lts/*
 before_install:
   - 'npm i -g yarn greenkeeper-lockfile'
-  - 'if [[ $GH_TOKEN ]]; then ./.alobuild-prep-release.sh; fi;'
   - greenkeeper-lockfile-update
 install: 'yarn install --check-files'
 script:
@@ -23,9 +22,7 @@ jobs:
   include:
     - stage: Release
       node_js: stable
-      before_install:
-        - 'npm i -g yarn'
-        - 'if [[ $GH_TOKEN ]]; then ./.alobuild-prep-release.sh; fi;'
+      before_install: npm i -g yarn
       before_script:
         - 'yarn run build'
         - 'alo copy-files'
