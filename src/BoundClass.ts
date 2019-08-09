@@ -25,7 +25,7 @@ function performBinding(instance: any): void {
  * Decorate the class, making all methods decorated with @BoundMethod bound to
  * class instances.
  */
-export function BoundClass(): ClassDecorator {
+function BoundClass(): ClassDecorator {
   return (construct: any): any => {
     return class ClassWithBindings extends construct {
       public constructor(...args: any[]) {
@@ -36,11 +36,15 @@ export function BoundClass(): ClassDecorator {
   };
 }
 
-BoundClass.perform = performBinding; //for typings
-//for immutability
+BoundClass.perform = performBinding; // lgtm [js/useless-assignment-to-property]
+
+// Define this twice. The assignment above generates the typings while the assignment below makes sure it's immutable
+
 Object.defineProperty(BoundClass, 'perform', {
   configurable: false,
   enumerable: true,
   value: performBinding,
   writable: false
 });
+
+export {BoundClass};
