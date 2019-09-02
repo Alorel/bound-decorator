@@ -18,6 +18,7 @@
 - [Usage](#usage)
   - [TypeScript and Legacy Babel Decorators](#typescript-and-legacy-babel-decorators)
   - [Babel Decorators - Current Proposal](#babel-decorators---current-proposal)
+  - [Binding static methods](#binding-static-methods)
   - [General usage note (Typescript and Babel Legacy only)](#general-usage-note-typescript-and-babel-legacy-only)
   - [Note for Angular developers (Typescript and Babel Legacy-only)](#note-for-angular-developers-typescript-and-babel-legacy-only)
 
@@ -96,6 +97,18 @@ import {BoundMethod} from '@aloreljs/bound-decorator';
 class MyClass {
   @BoundMethod()
   method() {}
+}
+```
+
+## Binding static methods
+
+Static methods can be bound without the use of `@BoundClass`:
+
+```javascript
+class MyClass {
+  @BoundMethod()
+  static foo() {
+  }
 }
 ```
 

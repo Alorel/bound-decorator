@@ -30,16 +30,6 @@ describe(_.startCase(TEST_TYPE), function () {
   });
 
   describe('BoundMethod (internal)', () => {
-    it('Should fail when decorating statics', () => {
-      expect(() => {
-        class C {
-          @BoundMethod()
-          static method() {
-          }
-        }
-      }).to.throw('@BoundMethod can only decorate instance methods')
-    });
-
     it('Should fail when decorating non-methods', () => {
       expect(() => {
         class C {
@@ -256,5 +246,20 @@ describe(_.startCase(TEST_TYPE), function () {
         expect([1, 2].map(inst.mapper4)).to.deep.eq([5, 5]);
       });
     })
-  })
+  });
+
+  describe('Static method decorations', () => {
+    class Clazz {
+      static multiplier = 2;
+
+      @BoundMethod()
+      static multiply(inp) {
+        return inp * this.multiplier;
+      }
+    }
+
+    it('Should bind without @BoundClass', () => {
+      expect(Clazz.multiply(2)).to.equal(4);
+    });
+  });
 });

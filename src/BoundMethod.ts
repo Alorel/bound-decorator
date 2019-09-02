@@ -2,7 +2,6 @@ import {ProposalDescriptor} from './ProposalDescriptor';
 import {boundMethodArgs, boundMethods} from './symbols';
 
 const ERR_NOT_A_METHOD = '@BoundMethod can only decorate methods';
-const ERR_STATIC = '@BoundMethod can only decorate instance methods';
 
 function decorateLegacy(args: any[], target: any, method: PropertyKey, desc: PropertyDescriptor): void {
   if (!desc) {
@@ -15,7 +14,9 @@ function decorateLegacy(args: any[], target: any, method: PropertyKey, desc: Pro
   if (typeof desc.value !== 'function') {
     throw new Error(ERR_NOT_A_METHOD);
   } else if (Object.getPrototypeOf(target) === Function.prototype) {
-    throw new Error(ERR_STATIC);
+    target[method] = (<Function>target[method]).bind(target);
+
+    return;
   }
 
   if (!target[boundMethods]) {
@@ -33,9 +34,7 @@ function decorateLegacy(args: any[], target: any, method: PropertyKey, desc: Pro
 }
 
 function decorateNew(args: any[], desc: ProposalDescriptor): ProposalDescriptor {
-  if (desc.placement !== 'prototype') {
-    throw new Error(ERR_STATIC);
-  } else if (desc.kind !== 'method') {
+  if (desc.kind !== 'method') {
     throw new Error(ERR_NOT_A_METHOD);
   }
 
@@ -52,14 +51,25 @@ function decorateNew(args: any[], desc: ProposalDescriptor): ProposalDescriptor 
     return method.bind(this, ...args);
   }
 
-  extras.push({
-    descriptor: <any>Object.assign(descriptor, {value: undefined}),
-    initialize,
-    initializer: initialize,
-    key: desc.key,
-    kind: 'field',
-    placement: 'own'
-  });
+  if (desc.placement === 'static') {
+    return {
+      descriptor: <any>Object.assign({}, descriptor, {value: undefined}),
+      initialize,
+      initializer: initialize,
+      key: desc.key,
+      kind: 'field',
+      placement: 'static'
+    };
+  } else {
+    extras.push({
+      descriptor: <any>Object.assign({}, descriptor, {value: undefined}),
+      initialize,
+      initializer: initialize,
+      key: desc.key,
+      kind: 'field',
+      placement: 'own'
+    });
+  }
 
   return desc;
 }

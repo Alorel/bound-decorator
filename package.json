@@ -19,7 +19,7 @@
     "test:babel:legacy": "babel --config-file ./.babelrc.legacy -o test/Test.legacy.js test/Test.js",
     "test:babel:new": "babel --config-file ./.babelrc.new -o test/Test.new.js test/Test.js",
     "test:compile": "concurrently -n tsc:test \"tsc -p ./tsconfig.test.json\" \"npm:test:babel:*\"",
-    "pretest": "concurrently -n build:src,build:test,clean \"alo build --targets cjs\" \"npm run test:compile && node pretest-postprocess.js\" \"rimraf coverage\"",
+    "pretest": "concurrently -n build:src,build:test,clean \"alo build --targets cjs --skip-package-fields\" \"npm run test:compile && node pretest-postprocess.js\" \"rimraf coverage\"",
     "doctoc": "doctoc --github README.md",
     "test": "nyc mocha -r source-map-support/register --check-leaks --exit --full-trace test/Test.legacy.js test/Test.new.js test/Test.typescript.js",
     "test:watch": "npm --scripts-prepend-node-path=auto run test -- --watch",
