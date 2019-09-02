@@ -1,3 +1,17 @@
+# [1.1.0](https://github.com/Alorel/bound-decorator/compare/1.0.3...1.1.0) (2019-09-02)
+
+
+### Features
+
+* Allow decorating static methods ([94511b7](https://github.com/Alorel/bound-decorator/commit/94511b7))
+
+
+### Maintenance
+
+* Add LGTM exception to BoundClass ([2c9bdec](https://github.com/Alorel/bound-decorator/commit/2c9bdec))
+* Update dependencies ([d3264e1](https://github.com/Alorel/bound-decorator/commit/d3264e1))
+* **deps:** bump fstream from 1.0.11 to 1.0.12 ([0f2a5ab](https://github.com/Alorel/bound-decorator/commit/0f2a5ab))
+
 ## [1.0.3](https://github.com/Alorel/bound-decorator/compare/1.0.2...1.0.3) (2019-04-25)
 
 
