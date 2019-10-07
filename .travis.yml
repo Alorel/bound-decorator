@@ -2,6 +2,9 @@ language: node_js
 node_js:
   - stable
   - lts/*
+env:
+  global:
+    - COVERALLS_PARALLEL=true
 before_install:
   - 'npm i -g yarn greenkeeper-lockfile'
   - greenkeeper-lockfile-update
@@ -30,3 +33,5 @@ jobs:
       after_success: []
       after_script: []
 
+notifications:
+  webhooks: https://coveralls.io/webhook
