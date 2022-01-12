@@ -1,36 +1,34 @@
 import {ProposalDescriptor} from './ProposalDescriptor';
-import {boundMethodArgs, boundMethods} from './symbols';
 
 const ERR_NOT_A_METHOD = '@BoundMethod can only decorate methods';
 
-function decorateLegacy(args: any[], target: any, method: PropertyKey, desc: PropertyDescriptor): void {
-  if (!desc) {
-    desc = <any>Object.getOwnPropertyDescriptor(target, method);
-    if (!desc) {
-      throw new Error('@BoundMethod: unable to get property descriptor');
-    }
-  }
-
-  if (typeof desc.value !== 'function') {
+function decorateLegacy(
+  args: any[],
+  methodName: PropertyKey,
+  desc: PropertyDescriptor
+): PropertyDescriptor {
+  if (!desc || typeof desc.value !== 'function') {
     throw new Error(ERR_NOT_A_METHOD);
-  } else if (Object.getPrototypeOf(target) === Function.prototype) {
-    target[method] = (<Function>target[method]).bind(target);
-
-    return;
   }
 
-  if (!target[boundMethods]) {
-    Object.defineProperty(target, boundMethods, {value: []});
-    Object.defineProperty(target, boundMethodArgs, {value: []});
-  }
-  // Override args in extending class
-  const idx = target[boundMethods].indexOf(method);
-  if (idx === -1) {
-    target[boundMethods].push(method);
-    target[boundMethodArgs].push(args);
-  } else {
-    target[boundMethodArgs][idx] = args;
-  }
+  const {configurable, enumerable, value: method} = desc;
+
+  return {
+    configurable,
+    enumerable,
+    get() {
+      // tslint:disable-next-line:no-invalid-this
+      const value = (method as Function).bind(this, ...args);
+      // tslint:disable-next-line:no-invalid-this
+      Object.defineProperty(this, methodName, {
+        configurable,
+        enumerable,
+        value,
+      });
+
+      return value;
+    }
+  };
 }
 
 function decorateNew(args: any[], desc: ProposalDescriptor): ProposalDescriptor {
@@ -42,10 +40,10 @@ function decorateNew(args: any[], desc: ProposalDescriptor): ProposalDescriptor 
   const method = desc.method || descriptor.value;
 
   if (!method) {
-    throw new Error('Unable to resolve method');
+    throw new Error(ERR_NOT_A_METHOD);
   }
 
-  const extras: ProposalDescriptor['extras'] = (desc.extras = desc.extras ? desc.extras.slice(0) : []);
+  const extras: ProposalDescriptor['extras'] = (desc.extras = desc.extras ? desc.extras.slice() : []);
 
   function initialize(this: any): any {
     return method.bind(this, ...args);
@@ -80,11 +78,11 @@ function decorateNew(args: any[], desc: ProposalDescriptor): ProposalDescriptor 
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
  */
 export function BoundMethod(...args: any[]): MethodDecorator {
-  return (targetOrDescriptor: any, method: PropertyKey, desc: PropertyDescriptor): ProposalDescriptor | void => {
-    if (method) {
-      decorateLegacy(args, targetOrDescriptor, method, desc);
-    } else {
-      return decorateNew(args, targetOrDescriptor);
-    }
+  return function ApplyBoundMethod(
+    targetOrDescriptor: any,
+    method: PropertyKey,
+    desc: PropertyDescriptor
+  ): ProposalDescriptor | PropertyDescriptor {
+    return method ? decorateLegacy(args, method, desc) : decorateNew(args, targetOrDescriptor);
   };
 }
