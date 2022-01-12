@@ -13,11 +13,11 @@ prepare:
 - path: &exec '@semantic-release/exec'
   cmd: yarn run doctoc
 - path: *exec
-  cmd: alo copy-files
+  cmd: ./node_modules/.bin/alo copy-files
 - path: *exec
-  cmd: alo clean-dist
+  cmd: ./node_modules/.bin/alo clean-dist
 - path: *exec
-  cmd: alo clean-pkg-json
+  cmd: ./node_modules/.bin/alo clean-pkg-json
 - path: '@semantic-release/git'
   message: 'chore(release): ${nextRelease.version}'
   assets:
