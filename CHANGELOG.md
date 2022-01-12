@@ -1,3 +1,20 @@
+# [2.0.0](https://github.com/Alorel/bound-decorator/compare/1.1.0...2.0.0) (2022-01-12)
+
+
+### Maintenance
+
+* **deps:** bump npm from 6.11.2 to 6.13.4 ([9f22acb](https://github.com/Alorel/bound-decorator/commit/9f22acbe3a6066c8a611bb7c8ea9eb44112c7669))
+
+
+### Refactoring
+
+* Remove BoundClass decorator ([d10a9b5](https://github.com/Alorel/bound-decorator/commit/d10a9b5d2e978b8dba84ad02bf9d22aab25c6072))
+
+
+### BREAKING CHANGES
+
+* The BoundClass decorator is no longer needed for Typescript & legacy Babel decorators and has been removed.
+
 # [1.1.0](https://github.com/Alorel/bound-decorator/compare/1.0.3...1.1.0) (2019-09-02)
 
 

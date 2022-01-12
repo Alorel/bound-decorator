@@ -1,7 +1,7 @@
 # Bound decorator
 
-[![Build Status](https://travis-ci.com/Alorel/bound-decorator.svg?branch=1.1.0)](https://travis-ci.com/Alorel/bound-decorator)
-[![Coverage Status](https://coveralls.io/repos/github/Alorel/bound-decorator/badge.svg?branch=1.1.0)](https://coveralls.io/github/Alorel/bound-decorator?branch=1.1.0)
+[![Build Status](https://travis-ci.com/Alorel/bound-decorator.svg?branch=2.0.0)](https://travis-ci.com/Alorel/bound-decorator)
+[![Coverage Status](https://coveralls.io/repos/github/Alorel/bound-decorator/badge.svg?branch=2.0.0)](https://coveralls.io/github/Alorel/bound-decorator?branch=2.0.0)
 
 -----
 
