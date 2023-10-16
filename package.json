@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@alorel-personal/build-tools": "4.7.19",
-    "@alorel-personal/conventional-changelog-alorel": "2.1.3",
+    "@alorel-personal/conventional-changelog-alorel": "3.0.0",
     "@alorel-personal/semantic-release": "1.4.0",
     "@alorel-personal/tslint-rules": "5.0.7",
     "@babel/cli": "~7.16.7",
