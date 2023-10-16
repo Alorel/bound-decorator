@@ -33,7 +33,7 @@ jobs:
       - name: Upload coverage
         if: ${{ matrix.os != 'windows-latest' }}
         continue-on-error: true
-        uses: coverallsapp/github-action@v1.1.2
+        uses: coverallsapp/github-action@v2.2.3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           flag-name: node-${{ matrix.node }}-on-${{ matrix.os }}-${{ github.event_name }}
@@ -44,7 +44,7 @@ jobs:
 #    continue-on-error: true
 #    steps:
 #      - name: Finalise coverage report
-#        uses: coverallsapp/github-action@v1.1.2
+#        uses: coverallsapp/github-action@v2.2.3
 #        with:
 #          github-token: ${{ secrets.GITHUB_TOKEN }}
 #          parallel-finished: true
