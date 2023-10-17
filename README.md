@@ -1,7 +1,11 @@
 # Bound decorator
 
-[![Build Status](https://travis-ci.com/Alorel/bound-decorator.svg?branch=2.0.0)](https://travis-ci.com/Alorel/bound-decorator)
-[![Coverage Status](https://coveralls.io/repos/github/Alorel/bound-decorator/badge.svg?branch=2.0.0)](https://coveralls.io/github/Alorel/bound-decorator?branch=2.0.0)
+An ES7 decorator for making class methods bound to the class instance (including statics).
+
+[![MASTER CI status](https://github.com/Alorel/bound-decorator/actions/workflows/core.yml/badge.svg)](https://github.com/Alorel/bound-decorator/actions/workflows/core.yml?query=branch%3Amaster)
+[![NPM badge](https://img.shields.io/npm/v/%40aloreljs/bound-decorator)](https://www.npmjs.com/package/%40aloreljs/bound-decorator)
+[![dependencies badge](https://img.shields.io/librariesio/release/npm/%40aloreljs/bound-decorator)](https://libraries.io/npm/@aloreljs%2Fbound-decorator)
+[![Coverage Status](https://coveralls.io/repos/github/Alorel/bound-decorator/badge.svg)](https://coveralls.io/github/Alorel/bound-decorator)
 
 -----
 
@@ -9,7 +13,6 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 
 - [Installation](#installation)
 - [Compatibility](#compatibility)
@@ -23,28 +26,9 @@
 npm install @aloreljs/bound-decorator
 ```
 
-Both Babel and Typescript currently struggle when mixing transpiled ES5 and non-transpiled ES6 classes together.
-You need to make sure to configure your build environment to import the correct version of the decorator.
-Below is a table of the decorator's main fields and their compatibility:
-
-|          Field         	| ES5 	| ES6 	|
-|-----------------------:	|:---:	|:---:	|
-| main (node.js default) 	|     	|  x  	|
-|         module         	|  x  	|     	|
-|         browser        	|  x  	|     	|
-|          esm5          	|  x  	|     	|
-|         esm2015        	|     	|  x  	|
-|          fesm5         	|  x  	|     	|
-|        fesm2015        	|     	|  x  	|
-
-Frontend bundlers typically use the `browser` or `module` field by default.
-
 # Compatibility
 
-- Typescript - full
-- Spec-compliant decorator proposal - full
-- Babel (current proposal) - full
-- Babel (legacy) - full
+The library's only goal is to be compatible with Typescript 5 decorators which, at the time of writing, use the [2022-03 stage 3 decorators proposal](https://2ality.com/2022/10/javascript-decorators.html).
 
 # Usage
 

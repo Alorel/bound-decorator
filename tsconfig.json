@@ -1,14 +1,9 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "sourceMap": true,
-    "outDir": "dist"
+    "sourceMap": false
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules"
+  "files": [
+    "src/index.ts"
   ]
 }
