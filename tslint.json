@@ -1,3 +1,0 @@
-{
-  "extends": "./node_modules/@alorel-personal/tslint-rules/tslint.json"
-}

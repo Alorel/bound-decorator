@@ -1,18 +1,11 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "esnext"
-    ],
-    "declaration": false,
-    "inlineSourceMap": true,
-    "importHelpers": true,
-    "checkJs": false,
-    "allowJs": true,
-    "outFile": "test/Test.typescript.js"
+    "module": "CommonJS",
+    "target": "ES2022",
+    "sourceMap": true
   },
-  "files": [
-    "test/Test.js"
+  "include": [
+    "src"
   ]
 }
