@@ -63,7 +63,7 @@
     "ts-node": "~8.5.4",
     "typescript": "~4.5.4"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "main": "index.js",
   "browser": "_bundle/umd.js",
   "jsdelivr": "_bundle/umd.min.js",
