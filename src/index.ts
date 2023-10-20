@@ -2,7 +2,7 @@ type Fn<T, A extends any[], R> = (this: T, ...args: A) => R;
 type Decorator<T, A extends any[], R> = (
   target: any,
   ctx: ClassMethodDecoratorContext<T, Fn<T, A, R>>
-) => any;
+) => void;
 
 function nameFn<T extends {name: string}>(value: string, fn: T): T {
   Object.defineProperty(fn, 'name', {
