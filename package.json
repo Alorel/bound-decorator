@@ -12,8 +12,8 @@
     "method",
     "auto"
   ],
-  "main": "cjs/index.cjs",
-  "module": "es/index.mjs",
+  "main": "cjs/index.js",
+  "module": "es/index.js",
   "types": "index.d.ts",
   "exports": {
     "./package.json": {
@@ -21,11 +21,11 @@
     },
     ".": {
       "types": "./index.d.ts",
-      "esm": "./es/index.mjs",
-      "module": "./es/index.mjs",
-      "import": "./es/index.mjs",
-      "node": "./cjs/index.cjs",
-      "default": "./cjs/index.cjs"
+      "esm": "./es/index.js",
+      "module": "./es/index.js",
+      "import": "./es/index.js",
+      "node": "./cjs/index.js",
+      "default": "./cjs/index.js"
     }
   },
   "publishConfig": {
@@ -34,8 +34,8 @@
   "scripts": {
     "clean": "rm -rfv dist && mkdir dist",
     "build": "concurrently npm:build:*",
-    "build:es": "tsc --outDir dist/es  && for f in dist/es/*.js; do mv \"$f\" \"${f%.js}.mjs\"; done",
-    "build:cjs": "tsc --outDir dist/cjs --module commonjs && for f in dist/cjs/*.js; do mv \"$f\" \"${f%.js}.cjs\"; done",
+    "build:es": "tsc --outDir dist/es",
+    "build:cjs": "tsc --outDir dist/cjs --module commonjs",
     "build:dts": "tsc --outDir dist --declaration --emitDeclarationOnly",
     "build:cp": "cp -v LICENSE README.md package.json .npmrc dist/",
     "watch": "npm --scripts-prepend-node-path=auto run clean  && tsc --watch",
