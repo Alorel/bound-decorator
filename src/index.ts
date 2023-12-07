@@ -1,8 +1,8 @@
+interface Ctx<T, A extends any[], R> extends Omit<ClassMethodDecoratorContext<T, Fn<T, A, R>>, 'private'> {
+  private: false;
+}
 type Fn<T, A extends any[], R> = (this: T, ...args: A) => R;
-type Decorator<T, A extends any[], R> = (
-  target: any,
-  ctx: ClassMethodDecoratorContext<T, Fn<T, A, R>>
-) => void;
+type Decorator<T, A extends any[], R> = (target: any, ctx: Ctx<T, A, R>) => void;
 
 function nameFn<T extends {name: string}>(value: string, fn: T): T {
   Object.defineProperty(fn, 'name', {
@@ -17,13 +17,9 @@ function nameFn<T extends {name: string}>(value: string, fn: T): T {
 function BoundMethod<T, A extends any[], R>(): Decorator<T, A, R>;
 function BoundMethod<T, A extends any[], R>(...args: Partial<A>): Decorator<T, A, R>;
 function BoundMethod<T, A extends any[], R>(...args: Partial<A>): Decorator<T, A, R> {
-  return function boundMethodDecorator(origFn: Function, {addInitializer, name, private: isPrivate}) {
+  return function boundMethodDecorator(origFn: Function, {addInitializer, name}) {
     const sName = String(name);
     const boundName = `Bound(${sName})`;
-
-    if (isPrivate) {
-      throw new Error('Can\'t make private methods bound');
-    }
 
     const performBind: (inst: T) => Fn<T, A, R> = nameFn(
       `BoundMethodBinder(${sName})`,
